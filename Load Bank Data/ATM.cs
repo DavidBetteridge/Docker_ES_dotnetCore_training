@@ -8,6 +8,6 @@ namespace Load_Bank_Data
     {
         public string AtmID { get; set; }
         public string Latitude { get; set; }
-        public string Longtitude { get; set; }
+        public string Longitude { get; set; }
     }
 }
