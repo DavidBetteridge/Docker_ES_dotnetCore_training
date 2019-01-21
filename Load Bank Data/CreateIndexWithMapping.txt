@@ -1,0 +1,42 @@
+﻿PUT banktransaction
+{
+    "settings" : {
+        "number_of_shards" : 1
+    },
+    "mappings" : {
+        "post" : {
+        "properties" : {
+          "AccountNumber" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "Amount" : {
+            "type" : "float"
+          },
+          "Atmid" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "ID" : {
+            "type" : "long"
+          },
+          "TransactionDateAndTimeUTC" : {
+            "type" : "date"
+          },
+          "location" : {
+            "type": "geo_point"
+          }
+        }
+      }
+}
+}

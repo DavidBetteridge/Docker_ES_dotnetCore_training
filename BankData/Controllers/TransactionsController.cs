@@ -53,10 +53,13 @@ namespace BankData.Controllers
 
             //This card was used at all ATMs machines during the night from 2am onwards
             var time = new DateTime(TransactionDate.Year, TransactionDate.Month, TransactionDate.Day, 2, 0, 0);
+            var j = numberOfTranactions;
             foreach (var atm in atms.SearchResults)
             {
+                j++;
                 transactions.Add(new CashWithdrawalViewModel()
                 {
+                    ID = long.Parse(TransactionDate.Year.ToString("00") + TransactionDate.Month.ToString("00") + TransactionDate.Day.ToString("00") + j.ToString("0000")),
                     AccountNumber = "10012300",
                     Amount = 500,
                     ATMID = atm.ATMId,

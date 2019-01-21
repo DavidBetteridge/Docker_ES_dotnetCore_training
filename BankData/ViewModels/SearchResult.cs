@@ -12,6 +12,6 @@ namespace BankData.ViewModels
     {
         public string ATMId { get; set; }
         public string Latitude { get; set; }
-        public string Longtitude { get; set; }
+        public string Longitude { get; set; }
     }
 }

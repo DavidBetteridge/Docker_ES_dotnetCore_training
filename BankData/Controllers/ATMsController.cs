@@ -25,7 +25,7 @@ namespace BankData.Controllers
                 {
                     ATMID = ATMID,
                     Latitude = atm.Latitude,
-                    Longtitude = atm.Longtitude
+                    Longitude = atm.Longitude
                 };
 
         }
