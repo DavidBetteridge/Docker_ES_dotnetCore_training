@@ -76,9 +76,10 @@ COPY ${source:-release/netcoreapp2.1/publish} .
 ENTRYPOINT ["dotnet", "ExampleWebSite.dll"]
 ```
 
+```
 dotnet publish
 docker build --tag davidbetteridgeproactis/example:Live  .
 docker login
 docker push davidbetteridgeproactis/example:latest
-
+```
 Try pulling and running someone elses site.

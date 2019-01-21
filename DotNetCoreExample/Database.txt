@@ -1,0 +1,17 @@
+﻿create database training
+go
+
+use training
+go
+
+create table dbo.Colours
+(
+	Code	varchar(100)	not null,
+	Name	varchar(100)	not null,
+constraint pk_Colours primary key (Code)
+)
+go
+
+insert into dbo.Colours select 'GREEN','Green'
+insert into dbo.Colours select 'BLUE','Blue'
+insert into dbo.Colours select 'YELLOW','Yellow'
