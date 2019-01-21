@@ -70,3 +70,5 @@ _logger.LogInformation("Email {SendTo} {SubjectLine}", _settings.ToAddress, _set
 
 ## Exercise
 Implement the rest of the colours controller
+
+## Show testing framework

@@ -1,3 +1,9 @@
+## What is docker  
+    virtual apps 
+    built in layers
+    no patching immutable
+    configuration as code
+
 ## Before you start
 * Make sure that the docker service is running
 * And Docker for the desktop is configured to run Linux containers
