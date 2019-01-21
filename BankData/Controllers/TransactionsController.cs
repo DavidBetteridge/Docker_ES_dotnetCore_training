@@ -34,6 +34,7 @@ namespace BankData.Controllers
 
                 transactions.Add(new CashWithdrawalViewModel()
                 {
+                    ID = long.Parse(TransactionDate.Year.ToString("00") + TransactionDate.Month.ToString("00") + TransactionDate.Day.ToString("00") + i.ToString("0000")),
                     AccountNumber = an,
                     Amount = 5 * rnd.Next(1, 200),
                     ATMID = atms.SearchResults[rnd.Next(atms.SearchResults.Count())].ATMId,
