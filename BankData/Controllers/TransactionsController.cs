@@ -15,9 +15,13 @@ namespace BankData.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CashWithdrawalViewModel>> Get(DateTime TransactionDate)
         {
-            if (TransactionDate > DateTime.Now) return BadRequest("Transaction date must be in the past");
+            if (TransactionDate < new DateTime(2000, 1, 1)) return BadRequest("A transaction date must be supplied and not before 1/1/2000");
 
-            var day = (int)(DateTime.Today - new DateTime(2000, 1, 1)).TotalDays;
+            var today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            var yesterday = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddDays(-1);
+            if (TransactionDate >= today) return BadRequest("Transaction date must be in the past");
+
+            var day = (int)(TransactionDate - new DateTime(2000, 1, 1)).TotalDays;
             var rnd = new Random(day);
 
             var json = System.IO.File.ReadAllText("Data/Yorkshire.atms.json");
@@ -47,25 +51,26 @@ namespace BankData.Controllers
                 });
 
                 usedNumbers.Add(an);
-
             }
 
-
-            //This card was used at all ATMs machines during the night from 2am onwards
-            var time = new DateTime(TransactionDate.Year, TransactionDate.Month, TransactionDate.Day, 2, 0, 0);
-            var j = numberOfTranactions;
-            foreach (var atm in atms.SearchResults)
+            if (TransactionDate >= yesterday)
             {
-                j++;
-                transactions.Add(new CashWithdrawalViewModel()
+                //This card was used at all ATMs machines during the night from 2am onwards
+                var time = new DateTime(TransactionDate.Year, TransactionDate.Month, TransactionDate.Day, 2, 0, 0);
+                var j = numberOfTranactions;
+                foreach (var atm in atms.SearchResults)
                 {
-                    ID = long.Parse(TransactionDate.Year.ToString("00") + TransactionDate.Month.ToString("00") + TransactionDate.Day.ToString("00") + j.ToString("0000")),
-                    AccountNumber = "10012300",
-                    Amount = 500,
-                    ATMID = atm.ATMId,
-                    TransactionDateAndTimeUTC = time
-                });
-                time = time.AddMinutes(5);
+                    j++;
+                    transactions.Add(new CashWithdrawalViewModel()
+                    {
+                        ID = long.Parse(TransactionDate.Year.ToString("00") + TransactionDate.Month.ToString("00") + TransactionDate.Day.ToString("00") + j.ToString("0000")),
+                        AccountNumber = "10012300",
+                        Amount = 500,
+                        ATMID = atm.ATMId,
+                        TransactionDateAndTimeUTC = time
+                    });
+                    time = time.AddMinutes(5);
+                }
             }
 
             return transactions.OrderBy(a => a.TransactionDateAndTimeUTC).ToArray();

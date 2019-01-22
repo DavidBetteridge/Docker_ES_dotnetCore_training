@@ -8,14 +8,16 @@
 * Make sure that the docker service is running
 * And Docker for the desktop is configured to run Linux containers
 
+
+
 ## Use an existing image
 ```
 docker images
-docker pull davidbetteridgeproactis/example
+docker pull davidbetteridgeproactis/example:Live
 docker images
 
 docker ps -a
-docker run -d -p 8122:80 davidbetteridgeproactis/example 
+docker run -d -p 8122:80 davidbetteridgeproactis/example:Live
 docker ps -a
 ```
 
@@ -32,17 +34,24 @@ docker ps -a
 ```powershell
 mkdir c:\Data1
 echo Container1 > c:\Data1\Data.txt
-docker run --name Example1 -d -p 8123:80 -v C:\Data1:/Data  davidbetteridgeproactis/example 
+docker run --name Example1 -d -p 8123:80 -v C:\Data1:/Data  davidbetteridgeproactis/example:Live
 ```
 Browse to http://localhost:8123
+
+
 
 ## Run a second instance
 ```powershell
 mkdir c:\Data2
 echo Container2 > c:\Data2\Data.txt
-docker run --name Example2 -d -p 8124:80 -v C:\Data2:/Data  davidbetteridgeproactis/example 
+docker run --name Example2 -d -p 8124:80 -v C:\Data2:/Data  davidbetteridgeproactis/example:Live
 ```
 Browse to http://localhost:8124
+
+
+
+
+
 
 
 ## docker-compose 
@@ -57,8 +66,11 @@ docker-compose down
 
 Browse to http://localhost:9001
 Browse to http://localhost:9002
-Browse to http://localhost:9002/Data
-Browse to http://localhost:9002/Data/machineName=Service1
+Browse to http://localhost:9002/api/Data
+
+
+
+Browse to http://localhost:9002/api/Data?machineName=Service1
 
 
 ## 3rd Party Software

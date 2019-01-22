@@ -13,7 +13,7 @@ namespace Load_Bank_Data
         {
             //Get transactions for yesterday
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8700");
+            client.BaseAddress = new Uri("http://localhost:8111");
 
             var transactions = await client.GetAsync("/api/Transactions?TransactionDate=2019-01-20T00:00:00");
             var json = await transactions.Content.ReadAsStringAsync();
@@ -27,7 +27,7 @@ namespace Load_Bank_Data
                 item.location = new Location()
                 {
                     lat = atm.Latitude,
-                    lon = atm.Longtitude,
+                    lon = atm.Longitude,
                 };
             }
 
